@@ -16,3 +16,5 @@ CREATE TABLE IF NOT EXISTS users (
 INSERT INTO users (first_name, last_name, email, password, role, phone_no)
 VALUES ('Admin', 'test', 'admin@library.com', 'admin123', 'ADMIN', "84848454545")
 ON DUPLICATE KEY UPDATE email = email;
+
+SELECT*FROM users;
