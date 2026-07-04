@@ -1,0 +1,26 @@
+# Maven build outputs (CRITICAL - Ignores the target folder completely)
+**/target/
+*.war
+*.ear
+*.jar
+
+# IDE specific settings (VS Code & Eclipse configurations)
+.settings/
+.project
+.classpath
+.factorypath
+.vscode/
+*.ext
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Log files and local databases
+*.log
+lib-local/
+
+# OS metadata files
+Thumbs.db
+.DS_Store
