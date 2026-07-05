@@ -18,3 +18,18 @@ VALUES ('Admin', 'test', 'admin@library.com', 'admin123', 'ADMIN', "84848454545"
 ON DUPLICATE KEY UPDATE email = email;
 
 SELECT*FROM users;
+
+CREATE TABLE IF NOT EXISTS books (
+    book_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(250) NOT NULL,
+    author VARCHAR(250) NOT NULL,
+    category VARCHAR(120),
+    isbn VARCHAR(30),
+    publisher VARCHAR(250),
+    total_copies INT NOT NULL,
+    available_copies INT NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+SELECT*FROM books;
