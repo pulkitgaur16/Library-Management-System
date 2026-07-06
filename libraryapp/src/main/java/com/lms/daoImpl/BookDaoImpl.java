@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.lms.dao.BookDao;
@@ -57,8 +58,37 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> getAllBookList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllBookList'");
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        ArrayList<Book> bookList = new ArrayList<>();
+
+        try {
+            String sql = "SELECT*FROM books";
+            conn = DbUtil.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            rs = preparedStatement.executeQuery();
+
+            while(rs.next()){
+                Book book = new Book();
+                book.setTitle(rs.getString("title"));
+                book.setAuthor(rs.getString("author"));
+                book.setCategory(rs.getString("category"));
+                book.setIsbn(rs.getString("isbn"));
+                book.setPublisher(rs.getString("publisher"));
+                book.setTotalCopies(rs.getInt("total_copies"));
+                book.setAvailableCopies(rs.getInt("available_copies"));
+                // book.setCreatedAt(new Date());
+                book.setStatus(rs.getString("status"));
+
+                bookList.add(book);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bookList;
     }
 
     @Override

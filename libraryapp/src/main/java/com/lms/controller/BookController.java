@@ -1,7 +1,9 @@
 package com.lms.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.lms.pojo.Book;
 import com.lms.service.BookService;
@@ -55,9 +57,20 @@ public class BookController extends HttpServlet {
             boolean flag = bookService.addBook(book);
 
             if(flag){
-                req.setAttribute("successMessage", "Book added successfully");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/addBook.jsp");
-                dispatcher.forward(req, resp);
+                List<Book> booklist = new ArrayList<>();
+                booklist = bookService.getAllBookList();
+
+                if(!booklist.isEmpty() && booklist != null){
+                    req.setAttribute("booklist", booklist);
+                    req.setAttribute("successMessage", "Book added successfully");
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/bookList.jsp");
+                    dispatcher.forward(req, resp);
+                }
+                else{
+                    req.setAttribute("errorMessage", "Something went wrong");
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/addBook.jsp");
+                    dispatcher.forward(req, resp);
+                }
             }
             else{
                 req.setAttribute("errorMessage", "Something went wrong");

@@ -24,8 +24,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getAllBookList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllBookList'");
+        return bookDao.getAllBookList();
     }
 
     @Override

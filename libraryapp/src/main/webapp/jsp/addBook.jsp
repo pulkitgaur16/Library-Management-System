@@ -32,13 +32,6 @@
 		    </div>
         </c:if>
 
-        <c:if test="${not empty successMessage}">
-		    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-		    		<c:out value="${successMessage}"/>
-		    		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		    </div>
-        </c:if>
-
         <div class="form-container">
             <form action="BookController" method="post">
                 <input type="hidden" name="action" value="addbook">
