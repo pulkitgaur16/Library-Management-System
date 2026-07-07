@@ -49,7 +49,7 @@
                                         <td><code><c:out value = "${book.isbn}"/></code></td>
                                         <td><span class="badge bg-success"><c:out value = "${book.status}"/></span></td>
                                         <td>
-                                            <a href="edit_book.html" class="action-btn edit" title="Edit Book"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="BookController?action=viewBook&bookId=${book.bookId}" class="action-btn edit" title="Edit Book"><i class="bi bi-pencil-square"></i></a>
                                             <button class="action-btn delete" title="Delete Book"><i class="bi bi-trash-fill"></i></button>
                                         </td>
                                     </tr>

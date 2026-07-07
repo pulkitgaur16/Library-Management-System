@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
                     conn.close();
                 }
             } catch (Exception e) {
-                // TODO: handle exception
+                e.printStackTrace();
             }
         }
 

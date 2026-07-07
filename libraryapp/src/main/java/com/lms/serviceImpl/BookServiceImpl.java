@@ -18,8 +18,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean updateBook(Book book) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateBook'");
+        return bookDao.updateBook(book);
     }
 
     @Override
@@ -31,6 +30,11 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBookByStatus(String status) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAllBookByStatus'");
+    }
+
+    @Override
+    public Book getBookById(long bookId) {
+        return bookDao.getBookById(bookId);
     }
     
 }
