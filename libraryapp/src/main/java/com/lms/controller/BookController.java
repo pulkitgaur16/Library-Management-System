@@ -60,7 +60,7 @@ public class BookController extends HttpServlet {
                 List<Book> booklist = new ArrayList<>();
                 booklist = bookService.getAllBookList();
 
-                if(!booklist.isEmpty() && booklist != null){
+                if(booklist != null && !booklist.isEmpty()){
                     req.setAttribute("booklist", booklist);
                     req.setAttribute("successMessage", "Book added successfully");
                     RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/bookList.jsp");
