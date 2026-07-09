@@ -216,15 +216,15 @@ public class UserDaoImpl implements UserDao {
 			
 			rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				 User user = new User();
-				 user.setFirstName(rs.getString("first_name"));
-				 user.setLastName(rs.getString("last_name"));
-				 user.setUserId(rs.getLong("user_id"));
-				 user.setEmail(rs.getString("email"));
-				 user.setAddress(rs.getString("address"));
-				 user.setPhoneNo(rs.getString("phone_no"));
+				User user = new User();
+				user.setFirstName(rs.getString("first_name"));
+				user.setLastName(rs.getString("last_name"));
+				user.setUserId(rs.getLong("user_id"));
+				user.setEmail(rs.getString("email"));
+				user.setAddress(rs.getString("address"));
+				user.setPhoneNo(rs.getString("phone_no"));
 				 
-				 return user;
+				return user;
 			}
 		}
 		catch (Exception e) {

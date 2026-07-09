@@ -3,6 +3,7 @@ package com.lms.dao;
 import java.util.List;
 
 import com.lms.pojo.Book;
+import com.lms.pojo.BookIssued;
 
 public interface BookDao {
 
@@ -15,4 +16,10 @@ public interface BookDao {
     public List<Book> getAllBookByStatus(String status);
 
     public Book getBookById(long bookId);
+
+    public List<Book> getAllAvailableBookList();
+	
+	public boolean assignBook(BookIssued bookIssued);
+	
+	public boolean updateAvailableBook(long bookId, int availableCopies);
 }

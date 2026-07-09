@@ -11,7 +11,7 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link ${param.action == 'assignBookForm' ? 'active' : ''}" href="/libraryapp/BookController?action=assignBookForm">
+                <a class="nav-link ${param.action == 'showAssignBook' ? 'active' : ''}" href="/libraryapp/BookController?action=showAssignBook">
                     <i class="bi bi-arrow-right-circle"></i>Assign Book
                 </a>
             </li>

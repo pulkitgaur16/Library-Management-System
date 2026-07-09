@@ -1,13 +1,20 @@
 package com.lms.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.lms.pojo.Book;
+import com.lms.pojo.BookIssued;
+import com.lms.pojo.User;
 import com.lms.service.BookService;
+import com.lms.service.UserService;
 import com.lms.serviceImpl.BookServiceImpl;
+import com.lms.serviceImpl.UserServiceImpl;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -15,6 +22,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/BookController")
 public class BookController extends HttpServlet {
@@ -152,6 +160,70 @@ public class BookController extends HttpServlet {
                 dispatcher.forward(req, resp);
             }
         }
+        else if("showAssignBook".equalsIgnoreCase(action)) {
+			UserService userService = new UserServiceImpl();
+			BookService bookService = new BookServiceImpl();
+			
+			List<Book> bookList = new ArrayList<>();
+			bookList = bookService.getAllAvailableBookList();
+			
+			List<User> userList = new ArrayList<>();
+			userList = userService.getAllUserList();
+			
+			if(bookList != null && bookList.size() > 0 && userList !=null && userList.size() > 0) {
+				req.setAttribute("bookList", bookList);
+				req.setAttribute("userList", userList);
+				RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/assignBook.jsp");
+				dispatcher.forward(req, resp);
+			}
+			else {
+				req.setAttribute("errorMessage", "Either book or user not available. Please try again.");
+				RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/assignBook.jsp");
+				dispatcher.forward(req, resp);
+			}
+		}
+		else if("assignBook".equalsIgnoreCase(action)) {
+			long bookId = Long.parseLong(req.getParameter("bookId"));
+			long userId = Long.parseLong(req.getParameter("userId"));
+			
+			String dueDate = req.getParameter("dueDate");
+			String assignmmentNotes = req.getParameter("assignmmentNotes");
+			
+			Book book = new Book();
+			book.setBookId(bookId);
+			
+			User user = new User();
+			user.setUserId(userId);
+			
+			BookIssued bookIssued = new BookIssued();
+			bookIssued.setBook(book);
+			bookIssued.setUser(user);
+			
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate localDueDate = null;
+	        try {
+	            localDueDate = LocalDate.parse(dueDate, dateFormatter);
+	            System.out.println("Parsed localDueDate: " + localDueDate);
+	        } catch (DateTimeParseException e) {
+	            System.err.println("Error parsing date: " + e.getMessage());
+	        }
+			
+			bookIssued.setDueDate(localDueDate);
+			bookIssued.setAssignmentNotes(assignmmentNotes);
+			
+			BookService bookService = new BookServiceImpl();
+			boolean assignflag = bookService.assignBook(bookIssued);
+			if(assignflag) {
+				HttpSession session = req.getSession();
+				session.setAttribute("sucessMessage", "Book assign successful!!");
+				resp.sendRedirect("BookController?action=showAssignBook");
+			}
+			else {
+				req.setAttribute("errorMessage", "Book not assigned. Please try again.");
+				RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/assignBook.jsp");
+				dispatcher.forward(req, resp);
+			}
+		}
         else{
             System.out.println("No action found");
         }

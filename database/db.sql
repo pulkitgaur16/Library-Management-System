@@ -33,3 +33,20 @@ CREATE TABLE IF NOT EXISTS books (
 );
 
 SELECT*FROM books;
+
+CREATE TABLE IF NOT EXISTS book_issued (
+    issue_id INT AUTO_INCREMENT PRIMARY KEY,
+    book_id INT NOT NULL,
+    user_id INT NOT NULL,
+    issue_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    due_date TIMESTAMP NULL,
+    return_date TIMESTAMP NULL,
+    status VARCHAR(50) NOT NULL,
+    book_condition VARCHAR(1024),
+    assignment_notes VARCHAR(1024),
+    return_notes VARCHAR(1024),
+    CONSTRAINT fk_book FOREIGN KEY (book_id) REFERENCES books(book_id),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+SELECT*FROM book_issued;
