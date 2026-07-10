@@ -30,9 +30,9 @@ public class AuthenticationController extends HttpServlet {
             UserService userService =  new UserServiceImpl(); // Polymorphism, coding to an interface
             User user = userService.checkLogin(username, password);
             if(user!=null){
-                // req.setAttribute("successMessage", "Invalid username or password");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/dashboard.jsp");
-                dispatcher.forward(req, resp);
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
+                resp.sendRedirect("DashboardController?action=viewDashboard");
             }
             else{
                 req.setAttribute("errorMessage", "Invalid username or password");
