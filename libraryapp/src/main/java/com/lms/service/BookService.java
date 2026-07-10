@@ -20,4 +20,10 @@ public interface BookService {
     public List<Book> getAllAvailableBookList();
 	
 	public boolean assignBook(BookIssued bookIssued);
+
+    public List<BookIssued> getAllIssuedBookList();
+	
+	public BookIssued getIssuedBookById(long issueId);
+	
+	public boolean updateBookReturn(BookIssued bookIssued);
 }

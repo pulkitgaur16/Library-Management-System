@@ -17,7 +17,7 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link ${param.action == 'returnBookForm' ? 'active' : ''}" href="/libraryapp/BookController?action=returnBookForm">
+                <a class="nav-link ${param.action == 'showReturnBook' ? 'active' : ''}" href="/libraryapp/BookController?action=showReturnBook">
                     <i class="bi bi-arrow-left-circle"></i>Return Book
                 </a>
             </li>

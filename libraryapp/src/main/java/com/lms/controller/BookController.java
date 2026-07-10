@@ -224,6 +224,84 @@ public class BookController extends HttpServlet {
 				dispatcher.forward(req, resp);
 			}
 		}
+        else if("showReturnBook".equalsIgnoreCase(action)) {
+			BookService bookService = new BookServiceImpl();
+			List<BookIssued> issuedList = bookService.getAllIssuedBookList();
+			
+			// Safety fallback: Initialize an empty list if database returns null
+            if(issuedList == null) {
+                issuedList = new ArrayList<>();
+            }
+    
+            // Only parse statuses if elements actually exist
+            if(!issuedList.isEmpty()) {
+                LocalDate today = LocalDate.now();
+                for (BookIssued bookIssued : issuedList) {
+                    LocalDate dueDate = bookIssued.getDueDate();
+                    if(dueDate.isBefore(today)) {
+                        bookIssued.setDueDayStatus("Overdue");
+                    }
+                    else if(dueDate.isEqual(today)) { 
+                        bookIssued.setDueDayStatus("Due Today");
+                    }
+                    else {
+                        bookIssued.setDueDayStatus("Active");
+                    }
+                }
+            }
+    
+            // FIX: This now executes EVERY single time, even if the database table is empty!
+            req.setAttribute("issuedList", issuedList);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/returnBook.jsp");
+            dispatcher.forward(req, resp);
+		}
+		else if("showReturnBookDetails".equalsIgnoreCase(action)) {
+			long issuedId = Long.parseLong(req.getParameter("issuedId"));
+			
+			BookService bookService = new BookServiceImpl();
+			BookIssued bookIssued = bookService.getIssuedBookById(issuedId);
+			
+			if(bookIssued != null) {
+				req.setAttribute("bookIssued", bookIssued);
+				RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/showReturnBookDetails.jsp");
+				dispatcher.forward(req, resp);
+			}
+		}
+		else if("returnBook".equalsIgnoreCase(action)) {
+			int issuedId = Integer.parseInt(req.getParameter("issuedId"));
+			String returnDate = req.getParameter("returnDate");
+			String bookCondition = req.getParameter("bookCondition");
+			String returnNotes = req.getParameter("returnNotes");
+			
+			BookIssued bookIssued = new BookIssued();
+			bookIssued.setIssueId(issuedId);
+			
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate localReturnDate = null;
+	        try {
+	        	localReturnDate = LocalDate.parse(returnDate, dateFormatter);
+	        } catch (DateTimeParseException e) {
+	            System.err.println("Error parsing date: " + e.getMessage());
+	        }
+			
+			bookIssued.setReturnDate(localReturnDate);
+			bookIssued.setBookCondition(bookCondition);
+			bookIssued.setReturnNotes(returnNotes);
+			
+			BookService bookService = new BookServiceImpl();
+			boolean flag = bookService.updateBookReturn(bookIssued);
+			
+			if(flag) {
+				HttpSession session = req.getSession();
+				session.setAttribute("sucessMessage", "Book return successful!!");
+				resp.sendRedirect("BookController?action=showReturnBook");
+			}
+			else {
+				HttpSession session = req.getSession();
+				session.setAttribute("errorMessage", "Something went wrong");
+				resp.sendRedirect("BookController?action=showReturnBook");
+			}
+		}
         else{
             System.out.println("No action found");
         }
