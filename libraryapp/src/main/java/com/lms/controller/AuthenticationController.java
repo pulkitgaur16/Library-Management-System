@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.annotation.WebServlet;
 
 @WebServlet("/AuthenticationController")
@@ -39,15 +40,28 @@ public class AuthenticationController extends HttpServlet {
                 dispatcher.forward(req, resp);
             }
         }
-        else{
-            System.out.print("No action found");
-        }
-    }
+        else if("showLogin".equalsIgnoreCase(action)) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/login.jsp");
+			dispatcher.forward(req, resp);
+		}
+		else if("signOut".equalsIgnoreCase(action)) {
+			HttpSession session = req.getSession();
+			if(session != null) {
+				session.invalidate();
+			}
+			
+			RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/login.jsp");
+			dispatcher.forward(req, resp);
+		}
+		else {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/error.jsp");
+			dispatcher.forward(req, resp);
+		}
+	}
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         doGet(req, resp);
-    }
-    
+    }  
 }

@@ -36,6 +36,14 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--primary-gradient) !important;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    
+    /* FIXES ADDED: Pinned layout state */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 56px;
+    z-index: 1030; /* Higher than the sidebar layer to stay on top */
 }
 
 .navbar-brand {
@@ -48,11 +56,11 @@ h1, h2, h3, h4, h5, h6 {
 /* Sidebar Styles */
 .sidebar {
     position: fixed;
-    top: 0;
+    top: 56px; /* FIX: Changed from 0 to match navbar height */
     bottom: 0;
     left: 0;
     z-index: 100;
-    padding: 48px 0 0;
+    padding: 0; /* FIX: Cleared old arbitrary padding */
     background: var(--sidebar-bg);
     border-right: 1px solid rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
@@ -105,6 +113,10 @@ h1, h2, h3, h4, h5, h6 {
     margin: 1rem;
     padding: 2rem;
     box-shadow: var(--card-shadow);
+}
+
+main {
+    padding-top: 76px; /* Pushes form containers down past the fixed header line */
 }
 
 /* Page Header Styles */
@@ -480,5 +492,9 @@ h1, h2, h3, h4, h5, h6 {
 
     .table-responsive {
         font-size: 0.8rem;
+    }
+
+    main {
+        padding-top: 20px; 
     }
 }
