@@ -26,4 +26,6 @@ public interface BookService {
 	public BookIssued getIssuedBookById(long issueId);
 	
 	public boolean updateBookReturn(BookIssued bookIssued);
+
+    public List<BookIssued> getIssuedBookListForDashboard();
 }

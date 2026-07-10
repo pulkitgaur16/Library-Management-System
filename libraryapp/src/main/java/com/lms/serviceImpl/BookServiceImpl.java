@@ -105,8 +105,8 @@ public class BookServiceImpl implements BookService {
 		return returnflag;
 	}
 
-	// @Override
-	// public List<BookIssued> getIssuedBookListForDashboard() {
-	// 	return bookDao.getIssuedBookListForDashboard();
-	// }
+	@Override
+	public List<BookIssued> getIssuedBookListForDashboard() {
+		return bookDao.getIssuedBookListForDashboard();
+	}
 }

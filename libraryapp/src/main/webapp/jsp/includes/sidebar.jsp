@@ -5,7 +5,7 @@
         <ul class="nav flex-column">
             
             <li class="nav-item">
-                <a class="nav-link ${empty param.action || param.action == 'dashboard' ? 'active' : ''}" href="/libraryapp/jsp/dashboard.jsp">
+                <a class="nav-link ${empty param.action || param.action == 'viewDashboard' ? 'active' : ''}" href="/libraryapp/DashboardController?action=viewDashboard">
                     <i class="bi bi-speedometer2"></i>Dashboard
                 </a>
             </li>

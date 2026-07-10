@@ -1,9 +1,10 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ include file= "includes/header.jsp" %>
 
 <div class="container-fluid">
 <div class="row">
-    <%@ include file= "includes/sidebar.jsp" %>
+     <%@ include file="includes/sidebar.jsp" %>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="page-header">
@@ -17,7 +18,9 @@
                     <div class="card-body">
                         <i class="bi bi-book-fill stat-icon"></i>
                         <h5 class="card-title">Total Books</h5>
-                        <p class="card-text">120</p>
+                        <p class="card-text">
+                        	<c:out value="${dashboardStats.totalBooks}"  default="0" />
+						</p>
                     </div>
                 </div>
             </div>
@@ -26,7 +29,9 @@
                     <div class="card-body">
                         <i class="bi bi-arrow-right-circle-fill stat-icon"></i>
                         <h5 class="card-title">Books Assigned</h5>
-                        <p class="card-text">45</p>
+                        <p class="card-text">
+                        	<c:out value="${dashboardStats.booksAssigned}"  default="0" />
+                        </p>
                     </div>
                 </div>
             </div>
@@ -35,7 +40,9 @@
                     <div class="card-body">
                         <i class="bi bi-arrow-left-circle-fill stat-icon"></i>
                         <h5 class="card-title">Books Returned</h5>
-                        <p class="card-text">40</p>
+                        <p class="card-text">
+                        	<c:out value="${dashboardStats.booksReturned}"  default="0" />
+                        </p>
                     </div>
                 </div>
             </div>
@@ -44,7 +51,9 @@
                     <div class="card-body">
                         <i class="bi bi-people-fill stat-icon"></i>
                         <h5 class="card-title">Users</h5>
-                        <p class="card-text">30</p>
+                        <p class="card-text">
+                        	<c:out value="${dashboardStats.totalUsers}"  default="0" />
+                        </p>
                     </div>
                 </div>
             </div>
@@ -54,36 +63,61 @@
         <h4 class="section-title">Currently Issued Books</h4>
         <div class="table-container">
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Category</th>
-                            <th>ISBN</th>
-						    <th>Due Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="badge bg-primary">1</span></td>
-                            <td><strong>The Great Gatsby</strong></td>
-                            <td>F. Scott Fitzgerald</td>
-                            <td><span class="badge bg-info">Fiction</span></td>
-                            <td><code>9780743273565</code></td>
-						    <td><span class="badge bg-warning">12-08-2025</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge bg-primary">2</span></td>
-                            <td><strong>Clean Code</strong></td>
-                            <td>Robert C. Martin</td>
-                            <td><span class="badge bg-success">Technology</span></td>
-                            <td><code>9780132350884</code></td>
-						    <td><span class="badge bg-warning">15-08-2025</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            	<c:choose>
+            		<c:when test="${not empty issuedList}">
+		                <table class="table table-hover align-middle">
+		                    <thead>
+		                        <tr>
+		                            <th>#</th>
+		                            <th>Book</th>
+		                            <th>Member</th>
+		                            <th>Issued On</th>
+		                            <th>Due Date</th>
+		                            <th>Status</th>
+		                            <th>Action</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                       <c:forEach var="bookIssued" items="${issuedList}" varStatus="status">
+		                        <tr>
+		                            <td><span class="badge bg-primary">${status.index + 1 }</span></td>
+		                            <td>
+		                                <strong> <c:out value="${bookIssued.book.title}" /></strong>
+		                                <div class="text-muted small">ISBN: <code><c:out value="${bookIssued.book.isbn}" /></code></div>
+		                            </td>
+		                            <td>
+		                                <div><c:out value="${bookIssued.user.firstName}" /> <c:out value="${bookIssued.user.lastName}" /></div>
+		                                <div class="text-muted small"><c:out value="${bookIssued.user.email}" /></div>
+		                            </td>
+		                            <td><c:out value="${bookIssued.issueDate}" /></td>
+		                            <td><c:out value="${bookIssued.dueDate}" /></td>
+		                            <c:choose>
+            							<c:when test="${bookIssued.dueDayStatus eq 'Overdue'}">
+		                            		<td><span class="badge bg-danger text-dark"><c:out value="${bookIssued.dueDayStatus}" /></span></td>
+		                            	</c:when>
+		                            	<c:when test="${bookIssued.dueDayStatus eq 'Due Today'}">
+		                            		<td><span class="badge bg-warning text-dark"><c:out value="${bookIssued.dueDayStatus}" /></span></td>
+		                            	</c:when>
+		                            	<c:otherwise>
+		                            		<td><span class="badge bg-success text-dark"><c:out value="${bookIssued.dueDayStatus}" /></span></td>
+		                            	</c:otherwise>
+		                            </c:choose>
+		                            <td>
+		                                <a href="BookController?action=showReturnBookDetails&issuedId=${bookIssued.issueId }" class="btn btn-sm btn-outline-primary">
+		                                    <i class="bi bi-arrow-return-left me-1"></i>Return
+		                                </a>
+		                            </td>
+		                        </tr>
+		                        </c:forEach>
+		                    </tbody>
+		                </table>
+                </c:when>
+            	<c:otherwise>	
+	            	<div>
+	            			No books issued
+	            	</div>
+            	</c:otherwise>
+            </c:choose>
             </div>
         </div>
     </main>
