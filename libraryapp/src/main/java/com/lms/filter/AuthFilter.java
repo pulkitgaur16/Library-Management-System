@@ -27,12 +27,14 @@ public class AuthFilter implements Filter {
         boolean loggedIn = (session != null && session.getAttribute("user") != null);
         boolean allowedUrl = url.equals(httpServletRequest.getContextPath() + "/") ||
                 url.equals(httpServletRequest.getContextPath() + "/AuthenticationController");
+
+        boolean staticResource = url.startsWith(httpServletRequest.getContextPath() + "/assets/");
         
-        if (loggedIn || allowedUrl) {
+        if (loggedIn || allowedUrl || staticResource) {
             chain.doFilter(request, response);
         }
         else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/login.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/login.jsp");
             dispatcher.forward(request, response);
         }
     }

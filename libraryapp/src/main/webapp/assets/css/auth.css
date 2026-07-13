@@ -1,7 +1,7 @@
 /* Authentication Pages Styles */
 
 :root {
-    --auth-bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --auth-bg-gradient: linear-gradient(135deg, #2B415A 0%,#236D73 50%,#26A69A 100%);
     --auth-card-shadow: 0 20px 60px rgba(0,0,0,0.1);
     --auth-card-hover-shadow: 0 25px 80px rgba(0,0,0,0.15);
     --auth-border-radius: 20px;
@@ -9,7 +9,7 @@
 }
 
 body.auth-page {
-    background: var(--auth-bg-gradient);
+    background: linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.08)), var(--auth-bg-gradient);
     margin: 0;
     padding: 2rem 1rem;
     min-height: 100vh;
