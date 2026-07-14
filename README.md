@@ -25,7 +25,16 @@ This project demonstrates my understanding of Java web application development u
 
 ## 🎥 Demo
 
-https://github.com/user-attachments/assets/f80c612f-2d38-4a91-8b5d-360714f8ff6f
+<p align="center">
+<a href="https://github.com/user-attachments/assets/f80c612f-2d38-4a91-8b5d-360714f8ff6f">
+<img src="libraryapp/src/main/webapp/assets/dashboard.png" width="900">
+</a>
+</p>
+
+<p align="center">
+<b>▶️ Click the image above to watch the demo video</b>
+</p>
+
 ---
 
 ## 🚀 Features
