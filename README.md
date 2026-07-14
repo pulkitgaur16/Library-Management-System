@@ -25,9 +25,15 @@ This project demonstrates my understanding of Java web application development u
 
 ## 🎥 Demo
 
-> **Replace the URL below after uploading your video to GitHub.**
+<p align="center">
+<a href="https://github.com/user-attachments/assets/f80c612f-2d38-4a91-8b5d-360714f8ff6f">
+<img src="libraryapp/src/main/webapp/assets/dashboard.png" width="900">
+</a>
+</p>
 
-https://github.com/user-attachments/assets/your-demo-video-link
+<p align="center">
+<b>▶️ Click the image above to watch the demo video</b>
+</p>
 
 ---
 
@@ -128,8 +134,23 @@ https://github.com/user-attachments/assets/your-demo-video-link
 </tr>
 
 <tr>
-<td align="center"><b>Assign Book</b></td>
 <td align="center"><b>Add Book</b></td>
+<td align="center"><b>Add User</b></td>
+</tr>
+
+<tr>
+<td>
+<img src="libraryapp/src/main/webapp/assets/addBook.png" width="450">
+</td>
+
+<td>
+<img src="libraryapp/src/main/webapp/assets/addUser.png" width="450">
+</td>
+</tr>
+
+<tr>
+<td align="center"><b>Assign Book</b></td>
+<td align="center"><b>Return Book</b></td>
 </tr>
 
 <tr>
@@ -138,19 +159,7 @@ https://github.com/user-attachments/assets/your-demo-video-link
 </td>
 
 <td>
-<img src="libraryapp/src/main/webapp/assets/addBook.png" width="450">
-</td>
-</tr>
-
-<tr>
-<td colspan="2" align="center">
-<b>Return Book</b>
-</td>
-</tr>
-
-<tr>
-<td colspan="2">
-<img src="libraryapp/src/main/webapp/assets/return_book.png">
+<img src="libraryapp/src/main/webapp/assets/return_book.png" width="450">
 </td>
 </tr>
 
