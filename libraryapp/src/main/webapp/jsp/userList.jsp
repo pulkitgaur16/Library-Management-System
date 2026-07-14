@@ -43,6 +43,14 @@
                             </div>
                         </c:if>
 
+                        <c:if test="${not empty errorMessage}">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <c:out value="${errorMessage}" />
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        </c:if>
+
                         <!-- Users Table -->
                         <div class="table-container">
                             <div class="table-responsive">

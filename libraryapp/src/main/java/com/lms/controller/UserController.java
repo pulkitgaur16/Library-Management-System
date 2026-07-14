@@ -126,8 +126,8 @@ public class UserController extends HttpServlet {
 	        user.setUserId(userId);
 	        
 	        UserService userService = new UserServiceImpl();
-	        boolean addFlag = userService.updateUser(user);
-	        if(addFlag) {
+	        boolean updateFlag = userService.updateUser(user);
+	        if(updateFlag) {
 	        	req.setAttribute("user", user);
 	        	req.setAttribute("successMessage", "User updated successfully!!");
 				RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/editUser.jsp");
