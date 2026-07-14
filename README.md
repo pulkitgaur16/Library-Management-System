@@ -2,12 +2,12 @@
 
 <p align="center">
 
-![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=openjdk)
-![Jakarta EE](https://img.shields.io/badge/Jakarta%20EE-11-red?style=for-the-badge)
-![MySQL](https://img.shields.io/badge/MySQL-8-blue?style=for-the-badge&logo=mysql)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple?style=for-the-badge&logo=bootstrap)
-![Maven](https://img.shields.io/badge/Maven-Build-red?style=for-the-badge&logo=apachemaven)
-![Tomcat](https://img.shields.io/badge/Tomcat-11-yellow?style=for-the-badge&logo=apachetomcat)
+![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Jakarta Servlet](https://img.shields.io/badge/Jakarta_Servlet-6.1-005C8A?style=for-the-badge&logo=eclipse&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-9.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.2-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-Build-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
+![Tomcat](https://img.shields.io/badge/Tomcat-11-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black)
 
 </p>
 
@@ -66,39 +66,57 @@ This project demonstrates my understanding of Java web application development, 
 
 ---
 
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
 | Category | Technologies |
 |----------|--------------|
 | Language | Java 17 |
-| Backend | Jakarta EE 11, Servlets, JSP, JSTL |
-| Frontend | HTML5, CSS3, JavaScript, Bootstrap 5 |
-| Database | MySQL, JDBC |
+| Backend | Jakarta Servlet 6.1, JSP, JSTL |
+| Frontend | HTML5, CSS3, JavaScript (ES6), Bootstrap 5 |
+| Database | MySQL, JDBC (MySQL Connector/J 9.0.0) |
 | Architecture | MVC + DAO |
 | Build Tool | Maven |
 | Server | Apache Tomcat 11 |
 
 ---
 
-# 📂 Project Structure
+## 📋 Prerequisites
 
-```
+Before running the project, ensure the following software is installed:
+
+- Java JDK 17 or higher
+- Apache Maven
+- Apache Tomcat 11
+- MySQL Server 8.0 or higher
+- MySQL Workbench *(optional, for database management)*
+
+---
+
+## 📂 Project Structure
+
+```text
 Library-Management-System
-│
-├── src/
-│   ├── controller/
-│   ├── dao/
-│   ├── model/
-│   ├── util/
-│   ├── filter/
-│   └── webapp/
 │
 ├── database/
 │   └── db.sql
 │
-├── target/
-│
-├── pom.xml
+├── libraryapp/
+│   ├── src/main/
+│   │   ├── java/com/lms/
+│   │   │   ├── controller/
+│   │   │   ├── dao/
+│   │   │   ├── service/
+│   │   │   ├── filter/
+│   │   │   ├── pojo/
+│   │   │   └── util/
+│   │   │
+│   │   └── webapp/
+│   │       ├── assets/
+│   │       ├── jsp/
+│   │       └── WEB-INF/
+│   │
+│   ├── pom.xml
+│   └── target/
 │
 └── README.md
 ```
@@ -191,40 +209,6 @@ Use the following administrator account to access the application after setup.
 | **Password** | `admin123` |
 
 > **Note:** This project currently supports a single administrator account for managing library operations. Additional authentication and role-based access can be implemented in future enhancements.
-
-# 📸 Screenshots
-
-## Dashboard
-
-> Replace with your own screenshot
-
-```
-assets/dashboard.png
-```
-
----
-
-## Add Member
-
-```
-assets/add-member.png
-```
-
----
-
-## Issue Book
-
-```
-assets/issue-book.png
-```
-
----
-
-## Return Book
-
-```
-assets/return-book.png
-```
 
 ---
 

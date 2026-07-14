@@ -58,6 +58,7 @@ public class UserController extends HttpServlet {
 
                 userList = userService.getAllUserList();
                 if(userList != null && userList.size()>0){
+                    req.setAttribute("successMessage", "User added successfully");
                     req.setAttribute("userList", userList);
                     RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/userList.jsp");
                     dispatcher.forward(req, resp);

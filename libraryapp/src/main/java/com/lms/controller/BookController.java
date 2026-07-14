@@ -48,7 +48,7 @@ public class BookController extends HttpServlet {
             String category = req.getParameter("category");
             String publisher = req.getParameter("publisher");
             String availableCopies = req.getParameter("availableCopies");
-            String numberOfcopies = req.getParameter("numberOfcopies");
+            String numberOfcopies = req.getParameter("numberofcopies");
 
             Book book = new Book();
             book.setTitle(bookTitle);
