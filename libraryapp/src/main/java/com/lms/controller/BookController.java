@@ -215,13 +215,13 @@ public class BookController extends HttpServlet {
 			boolean assignflag = bookService.assignBook(bookIssued);
 			if(assignflag) {
 				HttpSession session = req.getSession();
-				session.setAttribute("sucessMessage", "Book assign successful!!");
+				session.setAttribute("successMessage", "Book assigned successfully!!");
 				resp.sendRedirect("BookController?action=showAssignBook");
 			}
 			else {
-				req.setAttribute("errorMessage", "Book not assigned. Please try again.");
-				RequestDispatcher dispatcher = req.getRequestDispatcher("jsp/assignBook.jsp");
-				dispatcher.forward(req, resp);
+				HttpSession session = req.getSession();
+                session.setAttribute("errorMessage", "Book not assigned. Please try again.");
+                resp.sendRedirect("BookController?action=showAssignBook");
 			}
 		}
         else if("showReturnBook".equalsIgnoreCase(action)) {

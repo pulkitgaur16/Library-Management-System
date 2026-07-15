@@ -16,20 +16,25 @@
         </div>
         
         
-	 	<c:if test="${not empty sucessMessage}">
+	 	<c:if test="${not empty sessionScope.successMessage}">
 			<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<c:out value="${sucessMessage}"/>
+				<c:out value="${successMessage}"/>
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
+
+            <c:remove var="successMessage" scope="session"/>
 		</c:if>
 		
 		  
-	 	<c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				<c:out value="${errorMessage}"/>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-		</c:if>
+	 	<c:if test="${not empty sessionScope.errorMessage}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <c:out value="${sessionScope.errorMessage}"/>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    
+            <%-- This prevents the banner from staying stuck on page refresh --%>
+            <c:remove var="errorMessage" scope="session"/>
+        </c:if>
 
         <div class="form-container">
             <form action="BookController" method="post">
