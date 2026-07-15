@@ -301,6 +301,10 @@ public class BookController extends HttpServlet {
 				session.setAttribute("errorMessage", "Something went wrong");
 				resp.sendRedirect("BookController?action=showReturnBook");
 			}
+            // We haven't used these HttpSession while creating Users and Books page because there 
+            // we don't need to create the whole list again as we only add user or book but here we
+            // are adding as well as romoving books from return book list which requires creating
+            // the whole list again i.e. we have to call the same method again to create list
 		}
         else{
             System.out.println("No action found");

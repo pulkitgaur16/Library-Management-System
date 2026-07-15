@@ -94,11 +94,11 @@ public class BookServiceImpl implements BookService {
 			if(updateflag) {
 				 returnflag = bookDao.updateBookReturn(bookIssued);
 				
-				 if(!returnflag) {
-					 BookIssued bookIssued3 = bookDao.getIssuedBookById(bookIssued.getIssueId());
-					 int newAvailableCopies = bookIssued3.getBook().getAvailableCopies() - 1;
-					 bookDao.updateAvailableBook(bookIssued3.getBook().getBookId(), newAvailableCopies);
-				 }
+			    if(!returnflag) { // this can be a case that the object bookIssued inner book object is null for that reason we have created the another object bookIssued3 so that we can fetch the fresh data from database
+				    BookIssued bookIssued3 = bookDao.getIssuedBookById(bookIssued.getIssueId()); // bookIssued3 and bookIssued points to the same row but are at different places in memory
+				    int newAvailableCopies = bookIssued3.getBook().getAvailableCopies() - 1;
+				    bookDao.updateAvailableBook(bookIssued3.getBook().getBookId(), newAvailableCopies);
+			    }
 			}
 		}
 		
