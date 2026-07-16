@@ -185,7 +185,7 @@ function setupAddBookValidation() {
             availableCopiesError.textContent = 'Please enter available copies.';
             hasError = true;
         } else if (Number.isNaN(availableNumber) || availableNumber < 1) {
-            availableCopiesError.textContent = 'Available copies must must be at least 1.';
+            availableCopiesError.textContent = 'Available copies must be at least 1.';
             hasError = true;
         } 
         else if (availableNumber > totalNumber) {
