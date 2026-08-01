@@ -10,6 +10,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @WebFilter("/*")
@@ -20,6 +21,12 @@ public class AuthFilter implements Filter {
             throws IOException, ServletException {
         
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
+
+        // 1. GLOBALLY PREVENT CACHING FOR ALL SECURED ROUTES
+        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        resp.setHeader("Pragma", "no-cache");
+        resp.setDateHeader("Expires", 0);
         
         String url = httpServletRequest.getRequestURI();
         HttpSession session = httpServletRequest.getSession(false); // Safety improvement: false ensures we don't accidentally create an empty session
