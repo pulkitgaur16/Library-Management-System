@@ -24,9 +24,9 @@ public class AuthFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         // 1. GLOBALLY PREVENT CACHING FOR ALL SECURED ROUTES
-        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        resp.setHeader("Pragma", "no-cache");
-        resp.setDateHeader("Expires", 0);
+        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        resp.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        resp.setDateHeader("Expires", 0); // Proxies
         
         String url = httpServletRequest.getRequestURI();
         HttpSession session = httpServletRequest.getSession(false); // Safety improvement: false ensures we don't accidentally create an empty session
